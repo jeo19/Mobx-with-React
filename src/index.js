@@ -1,4 +1,4 @@
-import { decorate, observable, computed, autorun } from "mobx";
+import { decorate, observable, computed, autorun, transaction } from "mobx";
 
 class GS25 {
   basket = [];
@@ -22,9 +22,17 @@ decorate(GS25, {
 
 const gs25 = new GS25();
 autorun(() => gs25.total);
-gs25.select("water", 800);
-console.log(gs25.total);
-gs25.select("water", 800);
-console.log(gs25.total);
-gs25.select("water", 1500);
+// alert when add new data
+autorun(() => {
+  if (gs25.basket.length > 0) {
+    console.log(gs25.basket[gs25.basket.length - 1]);
+  }
+});
+
+transaction(() => {
+  gs25.select("Water", 800);
+  gs25.select("Water", 800);
+  gs25.select("Pocachip", 1500);
+});
+
 console.log(gs25.total);
