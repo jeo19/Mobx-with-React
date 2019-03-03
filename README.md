@@ -13,3 +13,17 @@
 > yarn eject
 >yarn add @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators
 ```
+
+And then find the babel section in package.json and Let's change
+
+```json
+"babel": {
+    "presets": [
+      "react-app"
+    ],
+    "plugins": [
+        ["@babel/plugin-proposal-decorators", { "legacy": true}],
+        ["@babel/plugin-proposal-class-properties", { "loose": true}]
+    ]
+  }
+```
